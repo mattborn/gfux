@@ -7,6 +7,7 @@ const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 
 async function getSentEmails() {
   try {
+    console.log('Starting authentication...');
     const auth = await authenticate({
       keyfilePath: 'credentials.json',
       scopes: SCOPES,
@@ -17,21 +18,23 @@ async function getSentEmails() {
     });
 
     const gmail = google.gmail({ version: 'v1', auth });
+    console.log('Authentication successful');
     
     // Get sent emails from last 3 months
     const threeMonthsAgo = new Date();
     threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-    const query = `after:${threeMonthsAgo.getTime() / 1000} in:sent`;
+    const query = 'in:sent';  // Simplify query to debug
     
     let messages = [];
     let pageToken;
     
     // Fetch pages until we have 1000 messages or run out of results
     do {
+      console.log(`Fetching messages batch (current count: ${messages.length})...`);
       const response = await gmail.users.messages.list({
         userId: 'me',
         q: query,
-        maxResults: Math.min(500, 1000 - messages.length),
+        maxResults: Math.max(1, Math.min(500, 3000 - messages.length)),
         pageToken
       });
       
@@ -41,8 +44,17 @@ async function getSentEmails() {
     } while (pageToken && messages.length < 3000);
     const emailSet = new Set();
 
+    console.log(`Found ${messages.length} messages total, extracting email addresses...`);
+    
+    console.log(`Found ${messages.length} messages total, extracting email addresses...`);
+    
     // Extract unique email addresses
+    let processedCount = 0;
     for (const message of messages) {
+      if (processedCount % 100 === 0) {
+        console.log(`Processing message ${processedCount} of ${messages.length}...`);
+      }
+      processedCount++;
       const email = await gmail.users.messages.get({
         userId: 'me',
         id: message.id,
@@ -60,6 +72,8 @@ async function getSentEmails() {
       }
     }
 
+    console.log(`Found ${emailSet.size} unique email addresses`);
+    
     // Save to file
     const emailList = Array.from(emailSet).join(', ');
     await fs.writeFile('email-list.txt', emailList);

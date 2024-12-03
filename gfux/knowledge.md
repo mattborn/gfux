@@ -20,6 +20,14 @@ Extract sent emails from Gmail for reuse in email campaigns (e.g. Loops.so)
   - Maintain data integrity during long-running exports
 - Keep derived data (like email lists) in separate files from raw data
 - Process exported data in memory to avoid duplicate file reads
+- Keep derived data clean:
+  - Remove duplicates from exported lists
+  - Process data before writing to derived files
+  - Maintain data integrity during exports
+- Keep derived data clean:
+  - Remove duplicates from exported lists
+  - Process data before writing to derived files
+  - Maintain data integrity during exports
 - Keep derived data (like email lists) in separate files from raw data
 - Process exported data in memory to avoid duplicate file reads
 

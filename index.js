@@ -96,9 +96,9 @@ async function getSentEmails() {
     // Final save to catch any remaining emails
     await fs.writeFile('sent-emails.json', JSON.stringify(emails, null, 2))
     
-    // Extract and write email addresses to separate file
-    const emailAddresses = emails.map(email => email.to).join('\n')
-    await fs.writeFile('email-addresses.txt', emailAddresses)
+    // Extract and write unique email addresses to separate file
+    const uniqueEmails = [...new Set(emails.map(email => email.to))]
+    await fs.writeFile('email-addresses.txt', uniqueEmails.join('\n'))
     console.log('Email addresses saved to email-addresses.txt')
     
     console.log(`Completed saving ${emails.length} emails to sent-emails.json`)

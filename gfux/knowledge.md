@@ -13,11 +13,6 @@ Extract sent emails from Gmail for reuse in email campaigns (e.g. Loops.so)
 - Gmail API limits results to 500 emails per request
 - Must use pagination to fetch more than 500 emails
 - Token-based pagination required for large email sets
-- Write data to JSON file in batches to:
-  - Preserve progress if process is interrupted
-  - Avoid memory issues with large datasets
-  - Enable progress monitoring
-  - Maintain data integrity during long-running exports
 
 ## Usage
 ```bash
@@ -27,3 +22,4 @@ node index.js
 ## Security Notes
 - credentials.json and token.json should be in .gitignore
 - Never commit .env file
+

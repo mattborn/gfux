@@ -17,6 +17,13 @@ Extract unique email addresses from Gmail sent folder for reuse in email campaig
   - No more nextPageToken available
 - Handle rate limits appropriately between pagination requests
 
+## Authentication
+- Must implement token caching to avoid re-authentication
+- Save token.json after initial OAuth2 flow
+- Check for existing token.json before starting new auth flow
+- Refresh token automatically when expired
+- Store tokens securely (never commit to repo)
+
 ## Setup Required
 1. Enable Gmail API in Google Cloud Console
 2. Create OAuth 2.0 credentials and download as credentials.json

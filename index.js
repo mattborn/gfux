@@ -11,7 +11,9 @@ async function getSentEmails() {
       keyfilePath: 'credentials.json',
       scopes: SCOPES,
       port: 3000,
-      redirectUri: 'http://localhost:3000/oauth2callback'
+      redirectUri: 'http://localhost:3000/oauth2callback',
+      // Save token to disk for later program executions
+      tokenPath: 'token.json'
     });
 
     const gmail = google.gmail({ version: 'v1', auth });

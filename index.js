@@ -21,13 +21,22 @@ async function getSentEmails() {
     threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
     const query = `after:${threeMonthsAgo.getTime() / 1000} in:sent`;
     
-    const response = await gmail.users.messages.list({
-      userId: 'me',
-      q: query,
-      maxResults: 500
-    });
-
-    const messages = response.data.messages || [];
+    let messages = [];
+    let pageToken;
+    
+    // Fetch pages until we have 1000 messages or run out of results
+    do {
+      const response = await gmail.users.messages.list({
+        userId: 'me',
+        q: query,
+        maxResults: Math.min(500, 1000 - messages.length),
+        pageToken
+      });
+      
+      const pageMessages = response.data.messages || [];
+      messages.push(...pageMessages);
+      pageToken = response.data.nextPageToken;
+    } while (pageToken && messages.length < 1000);
     const emailSet = new Set();
 
     // Extract unique email addresses

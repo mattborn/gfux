@@ -9,6 +9,14 @@ Extract unique email addresses from Gmail sent folder for reuse in email campaig
 - Output as comma-delimited list
 - Deduplicate addresses
 
+## API Considerations
+- Gmail API requires pagination for fetching >500 messages
+- Use pageToken from response.nextPageToken to fetch additional results
+- Continue fetching until either:
+  - Desired count reached
+  - No more nextPageToken available
+- Handle rate limits appropriately between pagination requests
+
 ## Setup Required
 1. Enable Gmail API in Google Cloud Console
 2. Create OAuth 2.0 credentials and download as credentials.json

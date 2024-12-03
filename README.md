@@ -1,6 +1,6 @@
 # Gmail Export Utility
 
-Extract sent emails from Gmail for reuse in email campaigns.
+Extract unique email addresses from Gmail sent emails.
 
 ## Setup
 
@@ -18,5 +18,6 @@ node index.js
 
 This will:
 1. Authenticate with Gmail API
-2. Fetch your most recent sent emails
-3. Save them to `sent-emails.json`
+2. Fetch sent emails from the last 3 months
+3. Extract unique recipient email addresses
+4. Save them as a comma-delimited list to `email-list.txt`

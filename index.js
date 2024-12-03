@@ -36,7 +36,7 @@ async function getSentEmails() {
       const pageMessages = response.data.messages || [];
       messages.push(...pageMessages);
       pageToken = response.data.nextPageToken;
-    } while (pageToken && messages.length < 1000);
+    } while (pageToken && messages.length < 3000);
     const emailSet = new Set();
 
     // Extract unique email addresses

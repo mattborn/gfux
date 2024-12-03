@@ -13,7 +13,7 @@ Extract unique email addresses from Gmail sent folder for reuse in email campaig
 - Gmail API requires pagination for fetching >500 messages
 - Use pageToken from response.nextPageToken to fetch additional results
 - Continue fetching until either:
-  - Desired count reached
+  - Desired count reached (aim for 3000+ to ensure comprehensive coverage)
   - No more nextPageToken available
 - Handle rate limits appropriately between pagination requests
 

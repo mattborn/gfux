@@ -1,6 +1,6 @@
 {
-  "title": "",
-  "description": "",
+  "title": "Gmail Export Utility",
+  "description": "Extract sent emails from Gmail for reuse in email campaigns",
   "image": "",
-  "tags": []
+  "tags": ["utility", "gmail", "automation"]
 }

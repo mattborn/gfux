@@ -1,6 +1,9 @@
 {
-  "title": "Gmail Export Utility",
+  "deps": ["api-gmail", "credentials.json"],
   "description": "Extract sent emails from Gmail for reuse in email campaigns",
   "image": "",
-  "tags": ["utility", "gmail", "automation"]
+  "repo": "mattborn/",
+  "tags": ["Broken", "Limbo"],
+  "title": "Gfux 🔴",
+  "urls": []
 }
